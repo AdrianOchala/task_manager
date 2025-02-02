@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Tasks;
 
 use App\Actions\Tasks\CreateTask;
 use App\Actions\Tasks\DeleteTask;
+use App\Actions\Tasks\UpdateTaskBasicInfo;
+use App\Data\Tasks\BasicInfoData;
 use App\Data\Tasks\TaskData;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
@@ -23,6 +25,13 @@ class TaskController extends Controller
     public function show(string $hashId): WrappedResponse
     {
         return new WrappedResponse(new TaskResource(Task::byHashOrFail($hashId)));
+    }
+
+    public function update(BasicInfoData $data, string $hashId): EmptyResponse
+    {
+        new UpdateTaskBasicInfo(Task::byHashOrFail($hashId), $data)->execute();
+
+        return new EmptyResponse();
     }
 
     public function store(TaskData $data): CreatedResponse
