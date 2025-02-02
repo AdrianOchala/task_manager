@@ -19,6 +19,7 @@ class TaskResource extends Resource
         return [
             'name' => $this->name,
             'description' => $this->description,
+            'status' => $this->status,
             'planned_at' => $this->planned_at,
             'due_at' => $this->due_at,
             'assignee' => new UserResource($this->whenLoaded('assignee')),

@@ -19,6 +19,7 @@ abstract class TaskStatus extends State
     {
         return parent::config()
             ->default(Pending::class)
+            ->ignoreSameState()
             ->allowTransition(Pending::class, Active::class, Activate::class)
             ->allowTransition(Pending::class, Cancelled::class, Cancel::class)
             ->allowTransition(Pending::class, Done::class, Finish::class)

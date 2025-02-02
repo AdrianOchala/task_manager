@@ -17,6 +17,7 @@ class Activate extends Transition
     public function handle(): Task
     {
         $this->task->status = new Active($this->task);
+        $this->task->save();
 
         return $this->task;
     }
