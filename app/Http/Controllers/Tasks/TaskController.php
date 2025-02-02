@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tasks;
 
 use App\Actions\Tasks\CreateTask;
 use App\Actions\Tasks\DeleteTask;
 use App\Data\Tasks\TaskData;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
 use App\Http\Responses\CreatedResponse;
 use App\Http\Responses\EmptyResponse;

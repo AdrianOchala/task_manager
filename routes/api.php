@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\GetTokenController;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\Tasks\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
