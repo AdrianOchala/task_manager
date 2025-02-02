@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Support\States\Tasks\Transitions;
 
+use App\Exceptions\Tasks\CannotActivateTaskException;
 use App\Models\Task;
 use App\Support\States\Tasks\Active;
+use App\Support\States\Tasks\Pending;
 use Spatie\ModelStates\Transition;
 
 class Activate extends Transition
@@ -16,6 +18,10 @@ class Activate extends Transition
 
     public function handle(): Task
     {
+        if ($this->task->due_at->lt(now())) {
+            throw new CannotActivateTaskException();
+        }
+
         $this->task->status = new Active($this->task);
         $this->task->save();
 
@@ -24,6 +30,6 @@ class Activate extends Transition
 
     public function canTransition(): bool
     {
-        return $this->task->due_at->gt(now());
+        return $this->task->status->equals(Pending::class);
     }
 }
