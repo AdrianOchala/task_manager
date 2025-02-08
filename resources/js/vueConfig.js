@@ -53,7 +53,6 @@ configure({
 setLocale('pl')
 
 axios.defaults.withCredentials = true
-// axios.defaults.baseURL = '/api'
 const axiosPlugin = {
     install(app) {
         app.config.globalProperties.$axios = axios
