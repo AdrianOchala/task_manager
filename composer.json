@@ -14,6 +14,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "spatie/laravel-data": "*",
+        "spatie/laravel-model-states": "^2.10",
         "veelasky/laravel-hashid": "^3.1"
     },
     "require-dev": {
