@@ -13,7 +13,7 @@ class LogoutController extends Controller
      */
     public function __invoke(Request $request): EmptyResponse
     {
-        auth()->logout();
+        auth('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
