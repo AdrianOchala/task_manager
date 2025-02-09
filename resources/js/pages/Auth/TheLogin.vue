@@ -13,6 +13,7 @@ const loginForm = ref()
 const showPassword = ref(false)
 
 const axios = inject('axios')
+const http = inject('http')
 
 const login = async () => {
     try {
@@ -24,6 +25,7 @@ const login = async () => {
         if (data?.errors && typeof data?.errors === 'object') {
             loginForm.value.setErrors(data?.errors)
         }
+        http.processAPIErrors(e)
     }
 }
 

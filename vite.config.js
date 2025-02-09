@@ -14,6 +14,8 @@ export default defineConfig({
             '@Layouts': '/resources/js/layouts',
             '@Stores': '/resources/js/stores',
             '@Router': '/resources/js/router',
+            '@Hooks': '/resources/js/hooks',
+            '@Plugins': '/resources/js/plugins',
         }
     },
     server: {

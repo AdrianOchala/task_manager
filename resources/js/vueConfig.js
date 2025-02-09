@@ -1,6 +1,9 @@
+import 'vue-toastification/dist/index.css'
+
 import { createApp } from "vue"
 import App from './App.vue'
-import { Quasar } from 'quasar'
+import { Quasar, Dialog } from 'quasar'
+import quasarLang from 'quasar/lang/pl'
 import { configure, defineRule } from "vee-validate"
 import { i18nVue, trans } from 'laravel-vue-i18n'
 import { localize, setLocale } from '@vee-validate/i18n'
@@ -8,6 +11,10 @@ import pl from '@vee-validate/i18n/dist/locale/pl.json'
 import en from '@vee-validate/i18n/dist/locale/en.json'
 import { all as allRules } from '@vee-validate/rules'
 import axios from "axios"
+import helpers from '@Plugins/helpers'
+import http from '@Plugins/http'
+import Toast, { POSITION } from 'vue-toastification'
+import VueCookies from 'vue-cookies'
 
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
@@ -22,8 +29,9 @@ const app = createApp(App)
 
 app.use(Quasar, {
     plugins: {
-
-    }
+        Dialog
+    },
+    lang: quasarLang
 })
 
 app.use(i18nVue, {
@@ -60,5 +68,29 @@ const axiosPlugin = {
     }
 }
 app.use(axiosPlugin)
+
+const helpersPlugin = {
+    install(app) {
+       app.config.globalProperties.$helpers = helpers
+       app.provide('helpers', helpers)
+    },
+ }
+ app.use(helpersPlugin)
+
+ const httpPlugin = {
+    install(app) {
+       app.config.globalProperties.$http = http
+       app.provide('http', http)
+    },
+ }
+app.use(httpPlugin)
+
+app.use(Toast, {
+    timeout: 2000,
+    position: POSITION.BOTTOM_RIGHT,
+})
+
+app.use(VueCookies)
+
 
 export default app
